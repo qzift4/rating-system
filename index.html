@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقييم العامل</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f4f4f9; }
+        .btn { display: inline-block; background: #4285f4; color: white; padding: 20px 40px; 
+               text-decoration: none; border-radius: 10px; font-size: 1.2rem; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>شكراً لزيارتكم!</h1>
+    <h2 id="workerDisplay">جاري التحميل...</h2>
+    <p>نقدر تقييمكم لخدمتنا.</p>
+    <a href="https://g.page/r/CZ272y52HBYEEBE/review" class="btn">اضغط هنا لتقييمنا بـ 5 نجوم</a>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const workerName = urlParams.get('worker');
+        if (workerName) {
+            document.getElementById('workerDisplay').innerText = "أنت تقيم الآن: " + workerName;
+        } else {
+            document.getElementById('workerDisplay').innerText = "شكراً لتقييمكم للمتجر";
+        }
+    </script>
+</body>
+</html>
