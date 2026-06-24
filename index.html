@@ -1,44 +1,70 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ترند كار | ServiceFlow</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap');
         body { font-family: 'Tajawal', sans-serif; background-color: #0A0A0A; }
+        .card-container { background: #ffffff; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .btn-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: inline-block; }
+        .btn-hover:hover { transform: translateY(-4px) scale(1.1); }
     </style>
 </head>
 <body class="p-4 min-h-screen flex items-center justify-center">
 
-    <main class="max-w-md w-full bg-white rounded-[2rem] p-8 shadow-2xl">
-        <header class="text-center mb-8 border-b border-gray-100 pb-6">
-            <h1 class="text-3xl font-extrabold text-[#D97706] mb-2">ترند كار</h1>
-            <p class="text-gray-500">نحن نهتم بجمال سيارتك</p>
-        </header>
+    <main class="max-w-md w-full">
+        <div class="card-container rounded-[2rem] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+            
+            <header class="text-center mb-8 border-b border-gray-100 pb-6">
+                <h1 id="userName" class="text-3xl font-extrabold text-[#D97706] mb-2">مرحباً بك</h1>
+                <p class="text-gray-500">نحن نهتم بجمال سيارتك</p>
+            </header>
 
-        <section class="grid grid-cols-2 gap-4 mb-8">
-            <div class="bg-gray-50 p-4 rounded-2xl text-center">
-                <span class="block text-gray-400 text-xs mb-1">الخصم</span>
-                <span id="userDiscount" class="text-[#059669] font-bold text-2xl">0%</span>
-            </div>
-            <div class="bg-gray-50 p-4 rounded-2xl text-center">
-                <span class="block text-gray-400 text-xs mb-1">الهدايا</span>
-                <span id="userGift" class="text-gray-800 font-bold text-lg">-</span>
-            </div>
-        </section>
+            <section class="grid grid-cols-2 gap-4 mb-8">
+                <div class="bg-gray-50 p-4 rounded-2xl text-center">
+                    <span class="block text-gray-400 text-xs uppercase mb-1">الخصم</span>
+                    <span id="userDiscount" class="text-[#059669] font-bold text-2xl">0%</span>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-2xl text-center">
+                    <span class="block text-gray-400 text-xs uppercase mb-1">الهدايا</span>
+                    <span id="userGift" class="text-gray-800 font-bold text-lg">-</span>
+                </div>
+            </section>
 
-        <section class="mb-8 text-center text-sm font-bold text-gray-800 uppercase tracking-widest">
-            العروض المتاحة
-            <div class="mt-4 bg-gray-50 p-4 rounded-2xl">
-                <h3 id="offerTitle" class="text-[#D97706]">جاري التحميل...</h3>
-            </div>
-        </section>
+            <section class="mb-8 text-center">
+                <h2 class="text-sm font-bold text-gray-800 uppercase tracking-widest mb-4">قيم تجربتك</h2>
+                <div class="flex justify-center gap-6 text-4xl">
+                    <a href="https://g.page/r/CZ272y52HBYEEBE/review" class="btn-hover">😞</a>
+                    <a href="https://g.page/r/CZ272y52HBYEEBE/review" class="btn-hover">😐</a>
+                    <a href="https://g.page/r/CZ272y52HBYEEBE/review" class="btn-hover">😊</a>
+                    <a href="https://g.page/r/CZ272y52HBYEEBE/review" class="btn-hover">🤩</a>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-2 gap-4 mb-8">
+                <a href="https://www.tiktok.com/@yaf3e59" class="btn-hover flex items-center justify-center bg-black text-white p-3 rounded-2xl">
+                    <i class="fab fa-tiktok ml-2"></i> تيك توك
+                </a>
+                <a href="#" class="btn-hover flex items-center justify-center bg-[#D97706] text-white p-3 rounded-2xl font-bold">
+                    <i class="fab fa-snapchat ml-2"></i> سناب شات
+                </a>
+            </section>
+
+            <section>
+                <h2 class="text-sm font-bold text-gray-800 uppercase tracking-widest mb-4 border-r-4 border-[#D97706] pr-3">العرض الحالي</h2>
+                <div class="bg-gray-50 p-4 rounded-2xl">
+                    <h3 id="offerTitle" class="font-bold text-gray-800">جاري التحميل...</h3>
+                </div>
+            </section>
+        </div>
     </main>
 
     <script>
-        const API_URL = 'ضع_رابط_الـ_Web_App_المحدث_هنا';
+        const API_URL = 'https://script.google.com/macros/s/AKfycbwcoCaMR5aRw528P0N1LKrDa-OWW0ohnQFc7La-p7_GlKAVoPKglJ5x0vnh-eUNFw9i0w/exec';
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
 
@@ -46,6 +72,7 @@
             fetch(`${API_URL}?id=${id}`)
                 .then(res => res.json())
                 .then(data => {
+                    document.getElementById('userName').innerText = "أهلاً " + data.name;
                     document.getElementById('userDiscount').innerText = data.discount + "%";
                     document.getElementById('userGift').innerText = data.gift;
                     document.getElementById('offerTitle').innerText = data.latestOffer;
