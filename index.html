@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ServiceFlow | بوابتك الرقمية</title>
+    <title>ServiceFlow | Elite Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
@@ -20,14 +20,14 @@
         <div class="card-container rounded-[2rem] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
             
             <header class="text-center mb-8 border-b border-gray-100 pb-6">
-                <h1 id="userName" class="text-3xl font-extrabold text-[#D97706] mb-2">مرحباً بك</h1>
+                <h1 id="userName" class="text-3xl font-extrabold text-[#D97706] mb-2">جاري التحميل...</h1>
                 <p class="text-gray-500">نحن نهتم بجمال سيارتك</p>
             </header>
 
             <section class="grid grid-cols-2 gap-4 mb-8">
                 <div class="bg-gray-50 p-4 rounded-2xl text-center">
                     <span class="block text-gray-400 text-xs uppercase tracking-wider mb-1">الخصم</span>
-                    <span id="userDiscount" class="text-[#059669] font-bold text-2xl">0%</span>
+                    <span id="userDiscount" class="text-[#059669] font-bold text-2xl">--</span>
                 </div>
                 <div class="bg-gray-50 p-4 rounded-2xl text-center">
                     <span class="block text-gray-400 text-xs uppercase tracking-wider mb-1">الهدايا</span>
@@ -60,7 +60,7 @@
                     <article class="bg-gray-50 p-4 rounded-2xl flex items-center">
                         <div class="w-16 h-16 bg-gray-200 rounded-xl ml-4"></div>
                         <div>
-                            <h3 id="offerTitle" class="font-bold text-gray-800">جاري التحميل...</h3>
+                            <h3 id="offerTitle" class="font-bold text-gray-800">لا توجد عروض حالياً</h3>
                         </div>
                     </article>
                 </div>
@@ -69,12 +69,13 @@
     </main>
 
     <script>
-        // الرابط الخاص بك
         const API_URL = 'https://script.google.com/macros/s/AKfycbxuajqn2D8Tpori3VU6dHl_mfYBMbQNPsSp8Lwgzegeh__8eprzfjN3tvYnsHqCKV4gXg/exec';
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
 
-        if(id) {
+        if(!id) {
+            document.getElementById('userName').innerText = "خطأ: لم يتم تحديد ID";
+        } else {
             fetch(`${API_URL}?id=${id}`)
                 .then(res => res.json())
                 .then(data => {
@@ -84,6 +85,10 @@
                     if(data.offers.length > 0) {
                         document.getElementById('offerTitle').innerText = data.offers[0].title;
                     }
+                })
+                .catch(err => {
+                    document.getElementById('userName').innerText = "خطأ في الاتصال";
+                    console.error(err);
                 });
         }
     </script>
