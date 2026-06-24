@@ -1,58 +1,44 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="scroll-smooth">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ServiceFlow | Elite Portal</title>
+    <title>ترند كار | ServiceFlow</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap');
         body { font-family: 'Tajawal', sans-serif; background-color: #0A0A0A; }
-        .card-container { background: #ffffff; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .btn-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: inline-block; }
-        .btn-hover:hover { transform: translateY(-4px) scale(1.1); }
     </style>
 </head>
 <body class="p-4 min-h-screen flex items-center justify-center">
 
-    <main class="max-w-md w-full">
-        <div class="card-container rounded-[2rem] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
-            
-            <header class="text-center mb-8 border-b border-gray-100 pb-6">
-                <h1 id="userName" class="text-3xl font-extrabold text-[#D97706] mb-2">ترند كار</h1>
-                <p class="text-gray-500">نحن نهتم بجمال سيارتك</p>
-            </header>
+    <main class="max-w-md w-full bg-white rounded-[2rem] p-8 shadow-2xl">
+        <header class="text-center mb-8 border-b border-gray-100 pb-6">
+            <h1 class="text-3xl font-extrabold text-[#D97706] mb-2">ترند كار</h1>
+            <p class="text-gray-500">نحن نهتم بجمال سيارتك</p>
+        </header>
 
-            <section class="grid grid-cols-2 gap-4 mb-8">
-                <div class="bg-gray-50 p-4 rounded-2xl text-center">
-                    <span class="block text-gray-400 text-xs uppercase tracking-wider mb-1">الخصم</span>
-                    <span id="userDiscount" class="text-[#059669] font-bold text-2xl">0%</span>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-2xl text-center">
-                    <span class="block text-gray-400 text-xs uppercase tracking-wider mb-1">الهدايا</span>
-                    <span id="userGift" class="text-gray-800 font-bold text-lg">—</span>
-                </div>
-            </section>
+        <section class="grid grid-cols-2 gap-4 mb-8">
+            <div class="bg-gray-50 p-4 rounded-2xl text-center">
+                <span class="block text-gray-400 text-xs mb-1">الخصم</span>
+                <span id="userDiscount" class="text-[#059669] font-bold text-2xl">0%</span>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-2xl text-center">
+                <span class="block text-gray-400 text-xs mb-1">الهدايا</span>
+                <span id="userGift" class="text-gray-800 font-bold text-lg">-</span>
+            </div>
+        </section>
 
-            <!-- ... باقي أجزاء الصفحة كما هي ... -->
-
-            <section>
-                <h2 class="text-sm font-bold text-gray-800 uppercase tracking-widest mb-4 border-r-4 border-[#D97706] pr-3">العروض المتاحة</h2>
-                <div id="offers-grid">
-                    <article class="bg-gray-50 p-4 rounded-2xl flex items-center">
-                        <div class="w-16 h-16 bg-gray-200 rounded-xl ml-4"></div>
-                        <div>
-                            <h3 id="offerTitle" class="font-bold text-gray-800">جاري التحميل...</h3>
-                        </div>
-                    </article>
-                </div>
-            </section>
-        </div>
+        <section class="mb-8 text-center text-sm font-bold text-gray-800 uppercase tracking-widest">
+            العروض المتاحة
+            <div class="mt-4 bg-gray-50 p-4 rounded-2xl">
+                <h3 id="offerTitle" class="text-[#D97706]">جاري التحميل...</h3>
+            </div>
+        </section>
     </main>
 
     <script>
-        const API_URL = 'https://script.google.com/macros/s/AKfycbxuajqn2D8Tpori3VU6dHl_mfYBMbQNPsSp8Lwgzegeh__8eprzfjN3tvYnsHqCKV4gXg/exec';
+        const API_URL = 'ضع_رابط_الـ_Web_App_المحدث_هنا';
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
 
@@ -60,13 +46,9 @@
             fetch(`${API_URL}?id=${id}`)
                 .then(res => res.json())
                 .then(data => {
-                    // الربط الصحيح مع أعمدة ملف التقييم والعروض.xlsx
-                    document.getElementById('userName').innerText = "أهلاً " + data.profile.name;
-                    // تحويل النسبة المئوية من 0.10 إلى 10%
-                    document.getElementById('userDiscount').innerText = (data.profile.discount * 100) + "%";
-                    document.getElementById('userGift').innerText = data.profile.gift;
-                    // جلب العرض المحدث من عمود LatestOffer
-                    document.getElementById('offerTitle').innerText = data.profile.latestOffer;
+                    document.getElementById('userDiscount').innerText = data.discount + "%";
+                    document.getElementById('userGift').innerText = data.gift;
+                    document.getElementById('offerTitle').innerText = data.latestOffer;
                 });
         }
     </script>
