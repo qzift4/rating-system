@@ -7,37 +7,36 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* إضافة تأثير الزجاج الفاخر */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* البطاقة البيضاء الفاخرة */
+        .white-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #1a1a1a; /* نص غامق ليظهر بوضوح */
         }
-        /* حركة دخول العناصر */
         .fade-in { animation: fadeIn 0.8s ease-out; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #050505; }
+        body { background-color: #000000; font-family: 'Segoe UI', sans-serif; }
     </style>
 </head>
-<body class="text-white p-4 min-h-screen flex items-center justify-center">
+<body class="p-4 min-h-screen flex items-center justify-center">
 
-    <div class="max-w-md w-full rounded-[2rem] p-8 shadow-2xl glass-card fade-in">
+    <div class="max-w-md w-full rounded-[2rem] p-8 shadow-2xl white-card fade-in">
         
-        <div class="text-center mb-8 border-b border-white/10 pb-6">
-            <h1 class="text-3xl font-bold text-yellow-500 mb-2">أهلاً بك</h1>
-            <p class="text-gray-400">نحن نهتم بجمال سيارتك</p>
-            <div class="mt-6 bg-black/40 p-5 rounded-2xl flex justify-around border border-white/5">
+        <div class="text-center mb-8 border-b border-gray-200 pb-6">
+            <h1 class="text-3xl font-bold text-yellow-600 mb-2">أهلاً بك</h1>
+            <p class="text-gray-600">نحن نهتم بجمال سيارتك</p>
+            <div class="mt-6 bg-gray-100 p-5 rounded-2xl flex justify-around">
                 <div class="text-center">
                     <span class="block text-gray-500 text-sm">خصمك</span>
-                    <span class="text-green-400 font-bold text-2xl">0%</span>
+                    <span class="text-green-600 font-bold text-2xl">0%</span>
                 </div>
                 <div class="text-center">
                     <span class="block text-gray-500 text-sm">هديتك</span>
-                    <span class="text-gray-200 font-bold text-lg">---</span>
+                    <span class="text-gray-800 font-bold text-lg">---</span>
                 </div>
             </div>
         </div>
@@ -53,7 +52,7 @@
         </div>
 
         <div class="grid grid-cols-2 gap-4 mb-8">
-            <a href="#" class="flex items-center justify-center bg-gray-800 p-3 rounded-2xl hover:bg-black transition border border-white/10">
+            <a href="#" class="flex items-center justify-center bg-black text-white p-3 rounded-2xl hover:bg-gray-800 transition">
                 <i class="fab fa-tiktok ml-2 text-xl"></i> تيك توك
             </a>
             <a href="#" class="flex items-center justify-center bg-yellow-500 text-black p-3 rounded-2xl font-bold hover:bg-yellow-400 transition">
@@ -63,11 +62,11 @@
 
         <h2 class="text-lg font-bold mb-4 border-r-4 border-yellow-500 pr-3">عروضنا الأسبوعية</h2>
         <div id="offers-grid" class="space-y-4">
-            <div class="glass-card p-4 rounded-2xl flex items-center">
-                <div class="w-16 h-16 bg-gray-700 rounded-xl ml-4"></div>
+            <div class="bg-gray-100 p-4 rounded-2xl flex items-center border border-gray-200">
+                <div class="w-16 h-16 bg-gray-300 rounded-xl ml-4"></div>
                 <div>
-                    <h3 class="font-bold">باقة النانو سيراميك</h3>
-                    <p class="text-yellow-500 text-sm">خصم 20% لفترة محدودة</p>
+                    <h3 class="font-bold text-gray-800">باقة النانو سيراميك</h3>
+                    <p class="text-yellow-600 text-sm">خصم 20% لفترة محدودة</p>
                 </div>
             </div>
         </div>
