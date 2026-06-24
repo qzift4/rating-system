@@ -3,51 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ServiceFlow | Elite Portal</title>
+    <title>ServiceFlow | بوابتك الرقمية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap');
-        
-        :root {
-            --gold: #D97706;
-            --emerald: #059669;
-            --dark: #0A0A0A;
-        }
-        
-        body { font-family: 'Tajawal', sans-serif; background-color: var(--dark); }
-        
-        .card-container {
-            background: #ffffff;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
+        body { font-family: 'Tajawal', sans-serif; background-color: #0A0A0A; }
+        .card-container { background: #ffffff; border: 1px solid rgba(255, 255, 255, 0.1); }
         .btn-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: inline-block; }
         .btn-hover:hover { transform: translateY(-4px) scale(1.1); }
     </style>
 </head>
 <body class="p-4 min-h-screen flex items-center justify-center">
 
-    <main class="max-w-md w-full animate-in fade-in zoom-in duration-500">
+    <main class="max-w-md w-full">
         <div class="card-container rounded-[2rem] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
             
             <header class="text-center mb-8 border-b border-gray-100 pb-6">
-                <div class="w-16 h-16 bg-gray-900 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                    <i class="fas fa-car text-white text-2xl"></i>
-                </div>
-                <h1 class="text-3xl font-extrabold text-[#D97706] mb-2 tracking-tight">ترند كار</h1>
-                <p class="text-gray-500 font-medium">تجربة العناية بالسيارات الفاخرة</p>
+                <h1 id="userName" class="text-3xl font-extrabold text-[#D97706] mb-2">مرحباً بك</h1>
+                <p class="text-gray-500">نحن نهتم بجمال سيارتك</p>
             </header>
 
             <section class="grid grid-cols-2 gap-4 mb-8">
                 <div class="bg-gray-50 p-4 rounded-2xl text-center">
                     <span class="block text-gray-400 text-xs uppercase tracking-wider mb-1">الخصم</span>
-                    <span class="text-[#059669] font-bold text-2xl">0%</span>
+                    <span id="userDiscount" class="text-[#059669] font-bold text-2xl">0%</span>
                 </div>
                 <div class="bg-gray-50 p-4 rounded-2xl text-center">
                     <span class="block text-gray-400 text-xs uppercase tracking-wider mb-1">الهدايا</span>
-                    <span class="text-gray-800 font-bold text-2xl">—</span>
+                    <span id="userGift" class="text-gray-800 font-bold text-lg">—</span>
                 </div>
             </section>
 
@@ -72,14 +56,11 @@
 
             <section>
                 <h2 class="text-sm font-bold text-gray-800 uppercase tracking-widest mb-4 border-r-4 border-[#D97706] pr-3">العروض المتاحة</h2>
-                <div class="space-y-4">
-                    <article class="bg-gray-50 p-4 rounded-2xl flex items-center hover:bg-gray-100 transition-colors">
-                        <div class="w-16 h-16 bg-gray-200 rounded-xl ml-4 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1607860108855-64acf18783a4?q=80&w=200" class="w-full h-full object-cover">
-                        </div>
+                <div id="offers-grid">
+                    <article class="bg-gray-50 p-4 rounded-2xl flex items-center">
+                        <div class="w-16 h-16 bg-gray-200 rounded-xl ml-4"></div>
                         <div>
-                            <h3 class="font-bold text-gray-800">باقة النانو سيراميك</h3>
-                            <p class="text-[#D97706] text-xs font-bold">خصم 20% لفترة محدودة</p>
+                            <h3 id="offerTitle" class="font-bold text-gray-800">جاري التحميل...</h3>
                         </div>
                     </article>
                 </div>
@@ -87,5 +68,24 @@
         </div>
     </main>
 
+    <script>
+        // الرابط الخاص بك
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxuajqn2D8Tpori3VU6dHl_mfYBMbQNPsSp8Lwgzegeh__8eprzfjN3tvYnsHqCKV4gXg/exec';
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        if(id) {
+            fetch(`${API_URL}?id=${id}`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('userName').innerText = "أهلاً " + data.profile.name;
+                    document.getElementById('userDiscount').innerText = data.profile.discount + "%";
+                    document.getElementById('userGift').innerText = data.profile.gift;
+                    if(data.offers.length > 0) {
+                        document.getElementById('offerTitle').innerText = data.offers[0].title;
+                    }
+                });
+        }
+    </script>
 </body>
 </html>
