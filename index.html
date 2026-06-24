@@ -3,27 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تقييم العامل</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f4f4f9; }
-        .btn { display: inline-block; background: #4285f4; color: white; padding: 20px 40px; 
-               text-decoration: none; border-radius: 10px; font-size: 1.2rem; margin-top: 20px; }
-    </style>
+    <title>ServiceFlow | بوابتك الذكية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
-<body>
-    <h1>شكراً لزيارتكم!</h1>
-    <h2 id="workerDisplay">جاري التحميل...</h2>
-    <p>نقدر تقييمكم لخدمتنا.</p>
-    <a href="https://g.page/r/CZ272y52HBYEEBE/review" class="btn">اضغط هنا لتقييمنا بـ 5 نجوم</a>
+<body class="bg-black text-white font-sans p-4">
+
+    <div class="max-w-md mx-auto bg-gray-900 rounded-3xl p-6 border border-gray-800 shadow-2xl">
+        
+        <div id="profile" class="text-center mb-8 border-b border-gray-800 pb-6">
+            <h1 id="name" class="text-2xl font-bold text-yellow-500">أهلاً بك</h1>
+            <p id="car" class="text-gray-400"></p>
+            <div class="mt-4 bg-black p-4 rounded-2xl flex justify-around">
+                <div class="text-center">خـصمك<br><span id="discount" class="text-green-400 font-bold text-xl">0%</span></div>
+                <div class="text-center">هـديتك<br><span id="gift" class="text-gray-200 font-bold">--</span></div>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-3 text-center">قيّم تجربتك معنا</h2>
+            <div class="flex justify-center gap-4 text-3xl">
+                <button onclick="rate(1)" class="hover:scale-125 transition">😞</button>
+                <button onclick="rate(2)" class="hover:scale-125 transition">😐</button>
+                <button onclick="rate(3)" class="hover:scale-125 transition">😊</button>
+                <button onclick="rate(4)" class="hover:scale-125 transition">🤩</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-8">
+            <a href="رابط_تيك_توك_هنا" class="flex items-center justify-center bg-gray-800 p-3 rounded-xl hover:bg-black transition">
+                <i class="fab fa-tiktok ml-2 text-xl"></i> تيك توك
+            </a>
+            <a href="رابط_سناب_هنا" class="flex items-center justify-center bg-yellow-500 text-black p-3 rounded-xl font-bold hover:bg-yellow-400 transition">
+                <i class="fab fa-snapchat ml-2 text-xl"></i> سناب شات
+            </a>
+        </div>
+
+        <h2 class="text-lg font-bold mb-4">عروضنا الأسبوعية</h2>
+        <div id="offers-grid" class="grid gap-4"></div>
+    </div>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const workerName = urlParams.get('worker');
-        if (workerName) {
-            document.getElementById('workerDisplay').innerText = "أنت تقيم الآن: " + workerName;
-        } else {
-            document.getElementById('workerDisplay').innerText = "شكراً لتقييمكم للمتجر";
+        function rate(stars) {
+            alert("شكراً لتقييمك! " + stars + " نجوم");
+            // هنا يمكنك إضافة كود يرسل التقييم لجدول بياناتك
         }
+        
+        // جلب البيانات (كما في السابق)
+        // ... (نفس كود الـ fetch السابق)
     </script>
 </body>
 </html>
